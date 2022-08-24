@@ -21,7 +21,7 @@ type UpdateAtField struct {
 	UpdateAt int64 `bson:"updateat"`
 }
 
-var NewObjID = primitive.NewObjectID()
+var NewObjID = primitive.NewObjectID
 
 func NewObjectIDWithValue(id fmt.Stringer) {
 	NewObjID = func() primitive.ObjectID {
