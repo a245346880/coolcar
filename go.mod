@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/golang/protobuf v1.5.2
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.11.3
 	github.com/medivhzhan/weapp/v2 v2.5.0
 	github.com/streadway/amqp v1.0.0
@@ -18,7 +19,6 @@ require (
 	github.com/aws/aws-sdk-go v1.29.15 // indirect
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af // indirect
