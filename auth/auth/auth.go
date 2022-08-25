@@ -11,11 +11,12 @@ import (
 )
 
 type Service struct {
-	OpenIDResolver OpenIDResolver
-	Mongo          *dao.Mongo
-	TokenGenerator TokenGenerator
-	TokenExpire    time.Duration
-	Logger         *zap.Logger
+	OpenIDResolver                        OpenIDResolver
+	Mongo                                 *dao.Mongo
+	TokenGenerator                        TokenGenerator
+	TokenExpire                           time.Duration
+	Logger                                *zap.Logger
+	authpb.UnimplementedAuthServiceServer //pb为了保证向前兼容，必须内嵌 UnimplementedAuthServiceServer 结构体
 }
 
 // OpenIDResolver resolves an authorization code
