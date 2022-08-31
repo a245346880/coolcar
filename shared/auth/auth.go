@@ -79,6 +79,15 @@ func ContextWithAccountID(ctx context.Context, accountID id.AccountID) context.C
 	return context.WithValue(ctx, accountIDKey{}, accountID)
 }
 
+// AccountIDFromContext 构建带有AccountID的上下文
+func AccountIDFromContext(c context.Context) (id.AccountID, error) {
+	v := c.Value(accountIDKey{})
+	aid, ok := v.(id.AccountID)
+	if !ok {
+		return "", status.Error(codes.Unauthenticated, "")
+	}
+	return aid, nil
+}
 func impersonationFromContext(ctx context.Context) string {
 	//获取请求的元数据
 	m, ok := metadata.FromIncomingContext(ctx)

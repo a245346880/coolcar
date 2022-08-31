@@ -5,6 +5,7 @@ import (
 	rentalpb "coolcar/rental/api/gen/v1"
 	"coolcar/shared/id"
 	mgutil "coolcar/shared/mongo"
+	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -31,6 +32,18 @@ type ProfileRecord struct {
 	PhotoBlobID string            `bson:"photoblobid"`
 }
 
+func (m *Mongo) GetProfile(c context.Context, aid id.AccountID) (*ProfileRecord, error) {
+	res := m.col.FindOne(c, byAccountID(aid))
+	if err := res.Err(); err != nil {
+		return nil, err
+	}
+	var pr ProfileRecord
+	err := res.Decode(&pr)
+	if err != nil {
+		return nil, fmt.Errorf("connot decode profile record:%v", err)
+	}
+	return &pr, err
+}
 func (m *Mongo) UpdateProFile(c context.Context, aid id.AccountID, prevState rentalpb.IdentityStatus, p *rentalpb.Profile) error {
 	filter := bson.M{
 		identityStatusField: prevState,
